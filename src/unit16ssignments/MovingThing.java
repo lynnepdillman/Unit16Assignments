@@ -1,11 +1,9 @@
 package StarFighter;
 
-//(c) A+ Computer Science
-//www.apluscompsci.com
-//Name -
 import java.awt.Color;
 import java.awt.Graphics;
 
+//implements moveable interface
 public abstract class MovingThing implements Moveable {
 
     private int xPos;
