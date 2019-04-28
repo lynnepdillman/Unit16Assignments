@@ -1,8 +1,5 @@
 package StarFighter;
 
-//(c) A+ Computer Science
-//www.apluscompsci.com
-//Name -
 import java.io.File;
 import java.net.URL;
 import java.awt.Color;
@@ -10,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
+//use starfighter and outerspace to test
 public class Ship extends MovingThing {
 
     private int speed;
