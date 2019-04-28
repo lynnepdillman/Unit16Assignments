@@ -1,3 +1,4 @@
+package Starfighter;
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
@@ -19,37 +20,42 @@ public class Ammo extends MovingThing
 
 	public Ammo(int x, int y)
 	{
-		//add code
+		super(x, y);
 	}
 
 	public Ammo(int x, int y, int s)
 	{
-		//add code
+		super(x, y);
+		speed = s;
 	}
 
 	public void setSpeed(int s)
 	{
-	   //add code
+		speed = s;
 	}
 
 	public int getSpeed()
 	{
-	   return 0;
+	   return speed;
 	}
 
 	public void draw( Graphics window )
 	{
-		//add code to draw the ammo
+		window.setColor(Color.GREEN);
+		window.fillRect(getX(), getY(), 10, 10);
 	}
 	
 	
 	public void move( String direction )
 	{
-		//add code to draw the ammo
+		if (direction.equals("UP"))
+		{
+			setY(getY() - getSpeed());
+		}
 	}
 
 	public String toString()
 	{
-		return "";
+		return super.toString() + getSpeed();
 	}
 }
