@@ -1,155 +1,87 @@
+package StarFighter;
+
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
-
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Canvas;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import static java.lang.Character.*;
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class OuterSpace extends Canvas implements KeyListener, Runnable
-{
-	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
+public abstract class MovingThing implements Moveable {
 
-	/* uncomment once you are ready for this part
-	 *
-   private AlienHorde horde;
-	private Bullets shots;
-	*/
+    private int xPos;
+    private int yPos;
+    private int width;
+    private int height;
 
-	private boolean[] keys;
-	private BufferedImage back;
+    public MovingThing() {
+        xPos = 10;
+        yPos = 10;
+        width = 10;
+        height = 10;
+    }
 
-	public OuterSpace()
-	{
-		setBackground(Color.black);
+    public MovingThing(int x, int y) {
+        xPos = x;
+        yPos = y;
+        width = 10;
+        height = 10;
+    }
 
-		keys = new boolean[5];
+    public MovingThing(int x, int y, int w, int h) {
+        //add code here
+        xPos = x;
+        yPos = y;
+        width = w;
+        height = h;
+    }
 
-		//instantiate other instance variables
-		//Ship, Alien
+    public void setPos(int x, int y) {
+        //add code here
+        setX(x);
+        setY(y);
+    }
 
-		this.addKeyListener(this);
-		new Thread(this).start();
+    public void setX(int x) {
+        //add code here
+        xPos = x;
+    }
 
-		setVisible(true);
-	}
+    public void setY(int y) {
+        //add code here
+        yPos = y;
+    }
 
-   public void update(Graphics window)
-   {
-	   paint(window);
-   }
+    public int getX() {
+        return xPos;   //finish this method
+    }
 
-	public void paint( Graphics window )
-	{
-		//set up the double buffering to make the game animation nice and smooth
-		Graphics2D twoDGraph = (Graphics2D)window;
+    public int getY() {
+        return yPos;  //finish this method
+    }
 
-		//take a snap shop of the current screen and same it as an image
-		//that is the exact same width and height as the current screen
-		if(back==null)
-		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
+    public void setWidth(int w) {
+        //add code here
+        width = w;
+    }
 
-		//create a graphics reference to the back ground image
-		//we will draw all changes on the background image
-		Graphics graphToBack = back.createGraphics();
+    public void setHeight(int h) {
+        //add code here
+        height = h;
+    }
 
-		graphToBack.setColor(Color.BLUE);
-		graphToBack.drawString("StarFighter ", 25, 50 );
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,800,600);
+    public int getWidth() {
+        return width;  //finish this method
+    }
 
-		if(keys[0] == true)
-		{
-			ship.move("LEFT");
-		}
+    public int getHeight() {
+        return height;  //finish this method
+    }
 
-		//add code to move Ship, Alien, etc.
+    public abstract void move(String direction);
 
+    public abstract void draw(Graphics window);
 
-		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
-
-
-		twoDGraph.drawImage(back, null, 0, 0);
-	}
-
-
-	public void keyPressed(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = true;
-		}
-		repaint();
-	}
-
-	public void keyReleased(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = false;
-		}
-		repaint();
-	}
-
-	public void keyTyped(KeyEvent e)
-	{
-      //no code needed here
-	}
-
-   public void run()
-   {
-   	try
-   	{
-   		while(true)
-   		{
-   		   Thread.currentThread().sleep(5);
-            repaint();
-         }
-      }catch(Exception e)
-      {
-      }
-  	}
+    public String toString() {
+        return getX() + " " + getY() + " " + getWidth() + " " + getHeight();
+    }
 }
-
